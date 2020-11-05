@@ -1,0 +1,57 @@
+<ion-header translucent>
+  <ion-toolbar color="tertiary">
+    <ion-title>
+      Pokedex App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen color="dark">
+  <ion-searchbar placeholder="Buscar pokemons" color="tertiary"></ion-searchbar>
+
+  <ion-item-sliding *ngIf="let pokemon of listaPokemons">
+
+    <ion-item color="dark">
+
+      <ion-chip slot="start">
+        <ion-label [color]="pokemon.types[0].type.name">{{ pokemon.id }}</ion-label>
+      </ion-chip>
+
+      <ion-label>
+        <div>
+          <h2>{{ pokemon.name }}</h2>
+          <ion-badge [color]="tipos.type.name" *ngFor="let tipos of pokemon.types">{{ tipos.type.nome }}</ion-badge>
+        </div>
+      </ion-label>
+
+      <ion-thumbnail slot="end">
+        <img [src]="pokemon.sprites.front_default" alt="Sprite">
+      </ion-thumbnail>
+
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option color="warning">Alterar</ion-item-option>
+      <ion-item-option color="danger">Excluir</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+  <ion-footer>
+    <ion-toolbar color="topdown">
+    <ion-buttons slot="start" *ngIf="previous">
+      <ion-button (click)="previousPage()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-badge color="medium"> {{pagina}} / {{totalPaginas}} </ion-badge>
+
+    <ion-buttons slot="end" *ngIf="next">
+      <ion-button (click)="nextPage()">
+        <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-footer>
+
+</ion-content>
